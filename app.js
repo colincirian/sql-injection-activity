@@ -8,8 +8,17 @@ app.use(express.static('.'))
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
-const db = new sqlite3.Database(':memory:');
-db.serialize(function () {
- db.run(â€œCREATE TABLE user (username TEXT, password TEXT, title TEXT)â€œ);
- db.run(â€œINSERT INTO user VALUES ('privilegedUser', 'privilegedUser1', 'Administrator')â€œ);
+// const db = new sqlite3.Database(':memory:');
+// db.serialize(function () {
+//  db.run(â€œCREATE TABLE user (username TEXT, password TEXT, title TEXT)â€œ);
+//  db.run(â€œINSERT INTO user VALUES ('privilegedUser', 'privilegedUser1', 'Administrator')â€œ);
+// });
+
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
 });
+
+const PORT = 3000;
+app.listen(PORT, () => {
+    console.log('server is running')
+})
